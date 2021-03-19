@@ -62,6 +62,7 @@ program2 = Program()
 program3 = Program()
 program4 = Program()
 
+
 #se crea clase para usar como plantilla de programa de matriculas 
 class Inscription(object):
    def __init__(self, average=0,men = 0,women = 0, numstudents = 0):
@@ -204,49 +205,21 @@ while menuSucces:
                                 program4.menCount()
                             if gender == 2:
                                 program4.womenCount()
+
+                    objprograms = [program0,program1,program2,program3,program4]
                     print('\n')
                     print('-------------------  Información Global de programas registrados -------------------------------------- \n')
-                    if program0.numstudents > 0:
-                        programName = programs[program0.program]
-                        print(f'###################### {programName.upper()} ######################')
-                        print(f'El número de estudiantes en el programa {programName} es: {program0.numstudents}')
-                        print(f'El promedio de notas del programa {programName} es: {program0.average/program0.numstudents}')
-                        print(f'El número de hombres en el programa {programName} es: {program0.men}')
-                        print(f'El número de mujeres en el programa {programName} es: {program0.women}')
-                        print(f'El número de personas con otra orientación sexual en el programa {programName} es: {program0.notbinary} \n')
-                    if program1.numstudents > 0:
-                        programName = programs[program1.program]
-                        print(f'###################### {programName.upper()} ######################')
-                        print(f'El número de estudiantes en el programa {programName} es: {program1.numstudents}')
-                        print(f'El promedio de notas del programa {programName} es: {program1.average/program1.numstudents}')
-                        print(f'El número de hombres en el programa {programName} es: {program1.men}')
-                        print(f'El número de mujeres en el programa {programName} es: {program1.women}')
-                        print(f'El número de personas con otra orientación sexual en el programa {programName} es: {program1.notbinary} \n')
-                    if program2.numstudents > 0:
-                        programName = programs[program2.program]
-                        print(f'###################### {programName.upper()} ######################')
-                        print(f'El número de estudiantes en el programa {programName} es: {program2.numstudents}')
-                        print(f'El promedio de notas del programa {programName} es: {program2.average/program2.numstudents}')
-                        print(f'El número de hombres en el programa {programName} es: {program2.men}')
-                        print(f'El número de mujeres en el programa {programName} es: {program2.women}')
-                        print(f'El número de personas con otra orientación sexual en el programa {programName} es: {program2.notbinary} \n')
-                    if program3.numstudents > 0:
-                        programName = programs[program3.program]
-                        print(f'###################### {programName.upper()} ######################')
-                        print(f'El número de estudiantes en el programa {programName} es: {program3.numstudents}')
-                        print(f'El promedio de notas del programa {programName} es: {program3.average/program3.numstudents}')
-                        print(f'El número de hombres en el programa {programName} es: {program3.men}')
-                        print(f'El número de mujeres en el programa {programName} es: {program3.women}')
-                        print(f'El número de personas con otra orientación sexual en el programa {programName} es: {program3.notbinary} \n')
-                    if program4.numstudents > 0:
-                        programName = programs[program4.program]
-                        print(f'###################### {programName.upper()} ######################')
-                        print(f'El número de estudiantes en el programa {programName} es: {program4.numstudents}')
-                        print(f'El promedio de notas del programa {programName} es: {program4.average/program4.numstudents}')
-                        print(f'El número de hombres en el programa {programName} es: {program4.men}')
-                        print(f'El número de mujeres en el programa {programName} es: {program4.women}')
-                        print(f'El número de personas con otra orientación sexual en el programa {programName} es: {program4.notbinary} \n')
-
+                    for i in objprograms:
+                        if i.numstudents > 0:
+                           programName = programs[i.program] 
+                           print(f'###################### {programName.upper()} ######################')
+                           print(f'El número de estudiantes en el programa {programName} es: {i.numstudents}')
+                           print(f'El promedio de notas del programa {programName} es: {i.average/i.numstudents}')
+                           print(f'El número de hombres en el programa {programName} es: {i.men}')
+                           print(f'El número de mujeres en el programa {programName} es: {i.women}')
+                           print(f'El número de personas con otra orientación sexual en el programa {programName} es: {i.notbinary} \n')
+                    
+                  
                     print('-------------------  Información de Estudiantes registrados -------------------------------------- \n')
 
                     for i in info:
@@ -275,12 +248,14 @@ while menuSucces:
             sexValidate = True
             while ageValidate:
                 try:
-                    age = int(input('Ingrese la edad Del estudiante: ')) 
-                    inscription.ageCount(age)
+                    age = int(input('Ingrese la edad Del estudiante: '))  
+                    if age > 0:
+                        ageValidate = False 
+                        inscription.ageCount(age)
+                    else:
+                        print('La edad debe ser mayor a 0, por favor ingrese nuevamente la edad')
                 except ValueError:
-                    print('La edad debe ser númerica, ingrese la edad nuevamente')
-                else:
-                    ageValidate = False 
+                    print('La edad debe ser númerica, ingrese la edad nuevamente')        
             while sexValidate:       
                 sex = input("Ingrese el sexo del estudiante (h - H) - Hombre  (m - M) - Mujer: ")
                 if sex == "m" or sex == "M":
